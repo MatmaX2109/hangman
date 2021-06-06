@@ -9,26 +9,12 @@ public class AppRun {
 
     RandomChose randomChose;
     GuessImpl guess;
+    InsertLetter insertLetter;
 
-    public AppRun(RandomChose randomChose, GuessImpl guess) {
+    public AppRun(RandomChose randomChose, GuessImpl guess, InsertLetter insertLetter) {
         this.randomChose = randomChose;
         this.guess = guess;
-    }
-
-    private String typeLetter(){
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Type a letter = ");
-
-        String letter;
-        do{
-            letter = scanner.nextLine();
-            if(letter.length() > 1){
-                System.out.println("Insert just 1 caracter !!! ");
-            }
-        }while (letter.length() != 1);
-
-        return letter.toLowerCase();
+        this.insertLetter = insertLetter;
     }
 
     private boolean hasAttempts(int maxAttempts, int attempts){
@@ -39,10 +25,9 @@ public class AppRun {
         return false;
     }
 
-
     public void run(){
 
-        final int maxAttempts = 1;
+        final int maxAttempts = 10;
 
         boolean canContinue = true;
         int rounds = 0;
@@ -60,7 +45,7 @@ public class AppRun {
                 System.out.println("MaskedWord = " + game.getMaskedWord());
                 System.out.println("used = " + game.getUsed());
 
-                String letter = typeLetter();
+                String letter = insertLetter.typeLetter();
 
                 guess.guess(letter.charAt(0), game);
 

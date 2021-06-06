@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 @Service
-public class WordUtils implements RandomChose {
+public class WordUtils implements RandomChose, InsertLetter {
     final static String[] pollOfWords = {"house", "mouse", "mama", "chair", "blockbuster"};
-//    final static String[] pollOfWords = {"mama"};
 
     public String getWord(){
         Random rand = new Random();
@@ -18,12 +18,19 @@ public class WordUtils implements RandomChose {
         return listOfWords.get(rand.nextInt(listOfWords.size())).toLowerCase();
     }
 
-    public boolean isWordFound(final Game game){
-        if(game.getWord().equals(game.getMaskedWord())){
-            System.out.println("Congratulations !!! You found the word !!!");
-            return true;
-        }
-        return false;
-    }
+    public String typeLetter(){
+        Scanner scanner = new Scanner(System.in);
 
+        System.out.println("Type a letter = ");
+
+        String letter;
+        do{
+            letter = scanner.nextLine();
+            if(letter.length() > 1){
+                System.out.println("Insert just 1 caracter !!! ");
+            }
+        }while (letter.length() != 1);
+
+        return letter.toLowerCase();
+    }
 }

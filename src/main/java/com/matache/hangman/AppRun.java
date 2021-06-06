@@ -44,19 +44,28 @@ public class AppRun {
 
         final int maxAttempts = 1;
 
-        String secretWord = randomChose.getWord();
-        Game game =  new Game(secretWord);
-        System.out.println("secretWord = "+game.getWord());
+        boolean canContinue = true;
+        int rounds = 0;
+        while(canContinue) {
 
+            rounds++;
 
-        do{
-            System.out.println("MaskedWord = "+game.getMaskedWord());
-            System.out.println("used = " + game.getUsed());
+            System.out.println("Points = " + (rounds-1) * 10);
 
-            String letter = typeLetter();
+            String secretWord = randomChose.getWord();
+            Game game = new Game(secretWord);
+            System.out.println("secretWord = " + game.getWord());
 
-            guess.guess(letter.charAt(0), game);
+            do {
+                System.out.println("MaskedWord = " + game.getMaskedWord());
+                System.out.println("used = " + game.getUsed());
 
-        }while (!guess.isWordFound(game) && hasAttempts(maxAttempts, game.getAttempts()));
+                String letter = typeLetter();
+
+                guess.guess(letter.charAt(0), game);
+
+                canContinue = hasAttempts(maxAttempts, game.getAttempts());
+            } while (!guess.isWordFound(game) && canContinue);
+        }
     }
 }

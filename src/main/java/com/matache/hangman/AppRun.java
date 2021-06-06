@@ -39,7 +39,7 @@ public class AppRun {
 
             String secretWord = randomChose.getWord();
             Game game = new Game(secretWord);
-            System.out.println("secretWord = " + game.getWord());
+//            System.out.println("secretWord = " + game.getWord());
 
             do {
                 System.out.println("MaskedWord = " + game.getMaskedWord());
